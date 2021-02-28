@@ -190,6 +190,8 @@ pub mod known {
         filter_map,
         next,
         iter_mut,
+        into_iter,
+        for_each,
         // Builtin macros
         file,
         column,

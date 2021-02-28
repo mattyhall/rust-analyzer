@@ -229,6 +229,47 @@ const _: i32 = 0b1010;
 }
 
 #[test]
+fn doctest_convert_iter_for_each_to_for() {
+    check_doc_test(
+        "convert_iter_for_each_to_for",
+        r#####"
+//- /libcore.rs crate:core
+pub mod iter { pub mod traits { pub mod iterator {
+    pub trait Iterator {
+        type Item;
+        fn next(&mut self) -> Option<Self::Item>;
+     }
+}}}
+//- /main.rs crate:main deps:core
+struct X;
+impl core::iter::traits::iterator::Iterator for X {
+    type Item = ();
+    fn next(&mut self) -> Option<()> { None }
+}
+fn main() {
+    let x = X;
+    x.$0for_each(|v| {
+        let y = v * 2;
+    });
+}
+"#####,
+        r#####"
+struct X;
+impl core::iter::traits::iterator::Iterator for X {
+    type Item = ();
+    fn next(&mut self) -> Option<()> { None }
+}
+fn main() {
+    let x = X;
+    for v in x {
+        let y = v * 2;
+    }
+}
+"#####,
+    )
+}
+
+#[test]
 fn doctest_convert_to_guarded_return() {
     check_doc_test(
         "convert_to_guarded_return",

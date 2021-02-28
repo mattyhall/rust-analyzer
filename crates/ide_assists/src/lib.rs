@@ -178,6 +178,7 @@ mod handlers {
             auto_import::auto_import,
             change_visibility::change_visibility,
             convert_for_to_iter_for_each::convert_for_to_iter_for_each,
+            convert_for_to_iter_for_each::convert_iter_for_each_to_for,
             convert_integer_literal::convert_integer_literal,
             early_return::convert_to_guarded_return,
             expand_glob_import::expand_glob_import,
